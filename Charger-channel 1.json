@@ -1,0 +1,1181 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 [\
+    \{\
+        "id": "16bb12a106bd8c3c",\
+        "type": "tab",\
+        "label": "Charger \'97 Channel 1",\
+        "disabled": false,\
+        "info": "Stage 2: dashboard UI for single channel \'97 inputs, optimiser, schedule publish."\
+    \},\
+    \{\
+        "id": "56dcce3eb8ae453b",\
+        "type": "comment",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "STAGE 2 \'97 optimiser + Channel 1 dashboard",\
+        "info": "Dashboard at http://127.0.0.1:1880/ui\\n\\nUser inputs write to flow context. 'Start' click builds params,\\npulls latest prices from flow context (set by Stage 1 flow),\\nruns optimiser, publishes to charger/1/schedule and updates UI.",\
+        "x": 230,\
+        "y": 40,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "25b2a78a68f3bf16",\
+        "type": "ui_numeric",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Battery Wh",\
+        "label": "Battery capacity (Wh)",\
+        "tooltip": "",\
+        "group": "69e678518d438924",\
+        "order": 1,\
+        "width": 0,\
+        "height": 0,\
+        "wrap": false,\
+        "passthru": false,\
+        "topic": "cap",\
+        "topicType": "str",\
+        "format": "\{\{value\}\}",\
+        "min": 50,\
+        "max": 2000,\
+        "step": 10,\
+        "className": "",\
+        "x": 1590,\
+        "y": 20,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "cc8549fe4fcf1e49",\
+        "type": "ui_numeric",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Initial %",\
+        "label": "Initial charge (%)",\
+        "tooltip": "",\
+        "group": "69e678518d438924",\
+        "order": 2,\
+        "width": 0,\
+        "height": 0,\
+        "wrap": false,\
+        "passthru": false,\
+        "topic": "init",\
+        "topicType": "str",\
+        "format": "\{\{value\}\}",\
+        "min": 0,\
+        "max": 100,\
+        "step": 1,\
+        "className": "",\
+        "x": 1590,\
+        "y": 70,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "4c21861822a49ad9",\
+        "type": "ui_numeric",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Target %",\
+        "label": "Target charge (%)",\
+        "tooltip": "",\
+        "group": "69e678518d438924",\
+        "order": 3,\
+        "width": 0,\
+        "height": 0,\
+        "wrap": false,\
+        "passthru": false,\
+        "topic": "target",\
+        "topicType": "str",\
+        "format": "\{\{value\}\}",\
+        "min": 0,\
+        "max": 100,\
+        "step": 1,\
+        "className": "",\
+        "x": 1590,\
+        "y": 120,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "75c6b3c57dd9ba76",\
+        "type": "ui_numeric",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Charger W",\
+        "label": "Charger power (W)",\
+        "tooltip": "",\
+        "group": "69e678518d438924",\
+        "order": 4,\
+        "width": 0,\
+        "height": 0,\
+        "wrap": false,\
+        "passthru": false,\
+        "topic": "power",\
+        "topicType": "str",\
+        "format": "\{\{value\}\}",\
+        "min": 20,\
+        "max": 1500,\
+        "step": 10,\
+        "className": "",\
+        "x": 1590,\
+        "y": 170,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "082a3a4c1380c411",\
+        "type": "ui_numeric",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Duration h",\
+        "label": "Charge within next (h)",\
+        "tooltip": "",\
+        "group": "69e678518d438924",\
+        "order": 5,\
+        "width": 0,\
+        "height": 0,\
+        "wrap": false,\
+        "passthru": false,\
+        "topic": "dur",\
+        "topicType": "str",\
+        "format": "\{\{value\}\}",\
+        "min": 0.5,\
+        "max": 48,\
+        "step": 0.25,\
+        "className": "",\
+        "x": 1590,\
+        "y": 220,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "abc69b7980d327e2",\
+        "type": "ui_dropdown",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Strategy",\
+        "label": "Strategy",\
+        "tooltip": "",\
+        "place": "Select",\
+        "group": "99fb6c49324cb851",\
+        "order": 1,\
+        "width": 0,\
+        "height": 0,\
+        "passthru": true,\
+        "multiple": false,\
+        "options": [\
+            \{\
+                "label": "Cheapest (hit target %)",\
+                "value": "cheapest",\
+                "type": "str"\
+            \},\
+            \{\
+                "label": "Gentle 80% (battery-friendly, late finish)",\
+                "value": "gentle_80",\
+                "type": "str"\
+            \},\
+            \{\
+                "label": "Max in window (take all cheap slots)",\
+                "value": "max_in_window",\
+                "type": "str"\
+            \}\
+        ],\
+        "payload": "",\
+        "topic": "strategy",\
+        "topicType": "str",\
+        "className": "",\
+        "x": 1590,\
+        "y": 280,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "d9ea880b0eb6c933",\
+        "type": "ui_switch",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Fit to window",\
+        "label": "If window too short: charge as much as possible",\
+        "tooltip": "",\
+        "group": "99fb6c49324cb851",\
+        "order": 2,\
+        "width": 0,\
+        "height": 0,\
+        "passthru": true,\
+        "decouple": "false",\
+        "topic": "fit",\
+        "topicType": "str",\
+        "style": "",\
+        "onvalue": "true",\
+        "onvalueType": "bool",\
+        "onicon": "",\
+        "oncolor": "",\
+        "offvalue": "false",\
+        "offvalueType": "bool",\
+        "officon": "",\
+        "offcolor": "",\
+        "animate": true,\
+        "className": "",\
+        "x": 1590,\
+        "y": 330,\
+        "wires": [\
+            [\
+                "dcfd512c79b0d10e"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "dcfd512c79b0d10e",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Remember params",\
+        "func": "// Each UI widget sends a message tagged by msg.topic.\\n// We stash the latest value for each topic in flow context.\\nconst params = flow.get('ch1_params') || \{\\n    cap: 500, init: 20, target: 90, power: 250,\\n    dur: 12, strategy: 'cheapest', fit: true\\n\};\\nparams[msg.topic] = msg.payload;\\nflow.set('ch1_params', params);\\nnode.status(\{ fill: 'blue', shape: 'dot', text: JSON.stringify(params).slice(0, 60) \});\\nreturn null; // no downstream output \'97 we wait for Start click\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 2050,\
+        "y": 180,\
+        "wires": [\
+            []\
+        ]\
+    \},\
+    \{\
+        "id": "7ee63f2e8bef25b7",\
+        "type": "ui_button",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Start button",\
+        "group": "99fb6c49324cb851",\
+        "order": 3,\
+        "width": 0,\
+        "height": 0,\
+        "passthru": false,\
+        "label": "\uc0\u9654   Start optimisation",\
+        "tooltip": "",\
+        "color": "",\
+        "bgcolor": "#2E7D32",\
+        "className": "",\
+        "icon": "",\
+        "payload": "start",\
+        "payloadType": "str",\
+        "topic": "action",\
+        "topicType": "str",\
+        "x": 1590,\
+        "y": 400,\
+        "wires": [\
+            [\
+                "0bd63818a80a566d",\
+                "23426f20f96abb87"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "180c945b822fffec",\
+        "type": "ui_button",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Reset button",\
+        "group": "99fb6c49324cb851",\
+        "order": 4,\
+        "width": 0,\
+        "height": 0,\
+        "passthru": false,\
+        "label": "\uc0\u8634   Reset",\
+        "tooltip": "",\
+        "color": "",\
+        "bgcolor": "#B71C1C",\
+        "className": "",\
+        "icon": "",\
+        "payload": "reset",\
+        "payloadType": "str",\
+        "topic": "action",\
+        "topicType": "str",\
+        "x": 650,\
+        "y": 580,\
+        "wires": [\
+            [\
+                "0bd63818a80a566d",\
+                "23426f20f96abb87",\
+                "354cc39934e43301"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "0bd63818a80a566d",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Optimiser",\
+        "func": "// ============================================================\\n// JS port of price-service/optimiser.py \'97 three modes.\\n// Triggered by Start or Reset button on the dashboard.\\n// Outputs: [state, soc, schedule_text, cost, saving, mqtt]\\n// ============================================================\\n\\nconst GENTLE_CAP = 80.0;\\nconst BIAS_DEFAULT = 0.30;\\n\\nif (msg.payload === 'reset') \{\\n    node.status(\{ fill: 'grey', shape: 'ring', text: 'reset' \});\\n    return [\\n        \{ payload: 'IDLE', topic: 'state' \},\\n        \{ payload: 0,      topic: 'soc' \},\\n        \{ payload: '-',    topic: 'schedule_text' \},\\n        \{ payload: 0,      topic: 'cost' \},\\n        \{ payload: 0,      topic: 'saving' \},\\n        \{ payload: \{ action: 'reset' \}, topic: 'charger/1/command' \}\\n    ];\\n\}\\nif (msg.payload !== 'start') \{ return null; \}\\n\\nconst p = flow.get('ch1_params') || \{\\n    cap: 500, init: 20, target: 90, power: 250,\\n    dur: 12, strategy: 'cheapest', fit: true\\n\};\\nconst prices = flow.get('prices');\\nif (!prices || prices.length === 0) \{\\n    node.status(\{ fill: 'red', shape: 'ring', text: 'no prices yet' \});\\n    return [\{ payload: 'ERROR: no price data', topic: 'state' \}];\\n\}\\n\\n// --- auto-detect slot length from consecutive timestamps ---\\nconst slotMinutes = prices.length > 1\\n    ? Math.max(1, Math.round((prices[1].ts - prices[0].ts) / 60))\\n    : 60;\\nconst slotHours = slotMinutes / 60;\\nconst windowSlots = Math.floor(p.dur / slotHours);\\nconst win = prices.slice(0, windowSlots);\\n\\nif (win.length === 0) \{\\n    return [\{ payload: 'ERROR: empty window', topic: 'state' \}];\\n\}\\n\\n// --- helpers ---\\nconst requiredSlotsFor = (wh) => Math.ceil(wh / (p.power * slotHours));\\nconst energyFor = (deltaPct) => p.cap * Math.max(0, deltaPct) / 100;\\n\\nlet chosen = [];\\nlet powerW = p.power;\\nlet requiredWh = 0;\\nlet effectiveTarget = p.target;\\nlet feasible = true;\\nlet reason = '';\\n\\nif (p.strategy === 'cheapest') \{\\n    effectiveTarget = p.target;\\n    requiredWh = energyFor(p.target - p.init);\\n    if (requiredWh > 0) \{\\n        const req = requiredSlotsFor(requiredWh);\\n        const n = Math.min(win.length, req);\\n        chosen = [...win].sort((a, b) => a.eur_mwh - b.eur_mwh).slice(0, n);\\n        powerW = Math.min(p.power, (requiredWh / n) / slotHours);\\n        feasible = req <= win.length;\\n        if (!feasible) reason = `Window too short: need $\{req\}, have $\{win.length\}.`;\\n    \} else \{\\n        reason = 'Target already reached.';\\n    \}\\n\\n\} else if (p.strategy === 'gentle_80') \{\\n    effectiveTarget = GENTLE_CAP;\\n    requiredWh = energyFor(GENTLE_CAP - p.init);\\n    if (requiredWh > 0) \{\\n        const req = requiredSlotsFor(requiredWh);\\n        const n = Math.min(win.length, req);\\n        // Score each slot: price_norm - bias * lateness_norm (lower wins)\\n        const prs = win.map(x => x.eur_mwh);\\n        const pmin = Math.min(...prs);\\n        const pmax = Math.max(...prs);\\n        const pspan = (pmax - pmin) || 1;\\n        const wlen = (win.length - 1) || 1;\\n        const ranked = win.map((h, idx) => (\{\\n            h, score: (h.eur_mwh - pmin) / pspan - BIAS_DEFAULT * (idx / wlen)\\n        \})).sort((a, b) => a.score - b.score);\\n        chosen = ranked.slice(0, n).map(r => r.h);\\n        powerW = Math.min(p.power, (requiredWh / n) / slotHours);\\n        feasible = req <= win.length;\\n        reason = feasible\\n            ? `Gentle: capped at $\{GENTLE_CAP\}%, deadline bias $\{BIAS_DEFAULT\}.`\\n            : `Window too short for gentle mode: need $\{req\}, have $\{win.length\}.`;\\n    \} else \{\\n        reason = `Already >= $\{GENTLE_CAP\}% cap.`;\\n    \}\\n\\n\} else if (p.strategy === 'max_in_window') \{\\n    // Take every slot below window median, stop before exceeding 100%.\\n    const sortedPrs = [...win].map(x => x.eur_mwh).sort((a, b) => a - b);\\n    const mid = sortedPrs.length % 2\\n        ? sortedPrs[(sortedPrs.length - 1) / 2]\\n        : (sortedPrs[sortedPrs.length / 2 - 1] + sortedPrs[sortedPrs.length / 2]) / 2;\\n    const headroomWh = p.cap * Math.max(0, 100 - p.init) / 100;\\n    const perSlotWh = p.power * slotHours;\\n    const cheap = win.filter(x => x.eur_mwh <= mid)\\n                     .sort((a, b) => a.eur_mwh - b.eur_mwh);\\n    let acc = 0;\\n    for (const h of cheap) \{\\n        if (acc + perSlotWh > headroomWh) break;\\n        chosen.push(h);\\n        acc += perSlotWh;\\n    \}\\n    powerW = p.power;\\n    requiredWh = acc;\\n    effectiveTarget = Math.min(100, p.init + (acc / p.cap) * 100);\\n    reason = `Max: $\{chosen.length\} slots below median $\{(mid / 10).toFixed(3)\} c/kWh.`;\\n\\n\} else \{\\n    return [\{ payload: `ERROR: unknown strategy $\{p.strategy\}`, topic: 'state' \}];\\n\}\\n\\nif (!feasible && !p.fit) \{\\n    return [\{ payload: `ERROR: $\{reason\}`, topic: 'state' \}];\\n\}\\n\\nchosen.sort((a, b) => a.ts - b.ts);\\nconst scheduledSlots = chosen.map(s => (\{\\n    ts: s.ts,\\n    slot_iso: s.hour_iso,\\n    eur_mwh: s.eur_mwh,\\n    c_kwh: s.c_kwh,\\n    power_w: powerW,\\n    energy_wh: powerW * slotHours,\\n    cost_eur: (powerW * slotHours / 1000) * (s.eur_mwh / 1000)\\n\}));\\n\\nconst totalEnergyWh = scheduledSlots.reduce((a, s) => a + s.energy_wh, 0);\\nconst totalCost = scheduledSlots.reduce((a, s) => a + s.cost_eur, 0);\\nconst finalSoc = Math.min(100, p.init + (totalEnergyWh / p.cap) * 100);\\n\\n// Naive reference: first N slots of window, same energy\\nconst naiveN = Math.max(1, scheduledSlots.length || requiredSlotsFor(requiredWh));\\nconst naivePerSlot = (requiredWh || totalEnergyWh) / naiveN;\\nconst naiveCost = win.slice(0, naiveN).reduce(\\n    (a, x) => a + (naivePerSlot / 1000) * (x.eur_mwh / 1000), 0);\\nconst saving = naiveCost - totalCost;  // can be negative if optimised is worse (should not happen)\\n\\nconst fmt = iso => new Date(iso).toLocaleTimeString('et-EE',\\n    \{ hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Tallinn' \});\\nconst scheduleText = scheduledSlots.length\\n    ? scheduledSlots.map(s =>\\n        `$\{fmt(s.slot_iso)\}  $\{s.c_kwh.toFixed(3)\} c/kWh  $\{s.power_w.toFixed(0)\} W`\\n      ).join('\\\\n')\\n    : '(no slots \'97 target already met or window empty)';\\n\\nnode.status(\{ fill: feasible ? 'green' : 'yellow', shape: 'dot',\\n    text: `$\{p.strategy\} \'b7 $\{scheduledSlots.length\} slots \'b7 EUR $\{totalCost.toFixed(4)\}` \});\\n\\nreturn [\\n    \{ payload: feasible ? 'WAITING' : 'PARTIAL', topic: 'state' \},\\n    \{ payload: p.init, topic: 'soc' \},\\n    \{ payload: scheduleText, topic: 'schedule_text' \},\\n    \{ payload: totalCost, topic: 'cost' \},\\n    \{ payload: saving, topic: 'saving' \},\\n    \{ payload: \{\\n        action: 'schedule',\\n        strategy: p.strategy,\\n        params: p,\\n        effective_target_pct: effectiveTarget,\\n        slot_minutes: slotMinutes,\\n        required_energy_wh: requiredWh,\\n        total_cost_eur: totalCost,\\n        saving_eur: saving,\\n        naive_cost_eur: naiveCost,\\n        final_soc_pct: finalSoc,\\n        feasible: feasible,\\n        reason: reason,\\n        slots: scheduledSlots\\n      \}, topic: 'charger/1/command' \}\\n];\\n",\
+        "outputs": 6,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1120,\
+        "y": 760,\
+        "wires": [\
+            [\
+                "0b7050462f7faa1f"\
+            ],\
+            [\
+                "39d46c4c29b8a701"\
+            ],\
+            [\
+                "210759b96cc32d3f"\
+            ],\
+            [\
+                "8c94db1270a45ff1"\
+            ],\
+            [\
+                "f600fb8a38547bec"\
+            ],\
+            [\
+                "dc7a8db520fdfb8f",\
+                "c5ba7592a9297ecf",\
+                "b14e316a058ffdad"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "0b7050462f7faa1f",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "fc49d01b81348539",\
+        "order": 1,\
+        "width": 0,\
+        "height": 0,\
+        "name": "State",\
+        "label": "State",\
+        "format": "\{\{msg.payload\}\}",\
+        "layout": "row-spread",\
+        "className": "",\
+        "x": 2770,\
+        "y": 800,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "39d46c4c29b8a701",\
+        "type": "ui_gauge",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "SoC gauge",\
+        "group": "fc49d01b81348539",\
+        "order": 2,\
+        "width": 0,\
+        "height": 0,\
+        "gtype": "gage",\
+        "title": "State of charge",\
+        "label": "%",\
+        "format": "\{\{value\}\}",\
+        "min": 0,\
+        "max": 100,\
+        "colors": [\
+            "#C62828",\
+            "#F9A825",\
+            "#2E7D32"\
+        ],\
+        "seg1": "40",\
+        "seg2": "75",\
+        "diff": false,\
+        "className": "",\
+        "x": 2790,\
+        "y": 880,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "210759b96cc32d3f",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "95a9eabb375ddad4",\
+        "order": 1,\
+        "width": 0,\
+        "height": 0,\
+        "name": "Schedule text",\
+        "label": "Selected slots",\
+        "format": "<pre style='margin:0;white-space:pre-wrap;font-size:12px'>\{\{msg.payload\}\}</pre>",\
+        "layout": "col-center",\
+        "className": "",\
+        "x": 2800,\
+        "y": 840,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "8c94db1270a45ff1",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "95a9eabb375ddad4",\
+        "order": 2,\
+        "width": 0,\
+        "height": 0,\
+        "name": "Total cost",\
+        "label": "Total cost (\'80)",\
+        "format": "\{\{msg.payload | number:4\}\}",\
+        "layout": "row-spread",\
+        "className": "",\
+        "x": 2780,\
+        "y": 920,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "f600fb8a38547bec",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "95a9eabb375ddad4",\
+        "order": 3,\
+        "width": 0,\
+        "height": 0,\
+        "name": "Saving",\
+        "label": "Saving vs. charge-now (\'80)",\
+        "format": "\{\{msg.payload | number:4\}\}",\
+        "layout": "row-spread",\
+        "className": "",\
+        "x": 2770,\
+        "y": 960,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "dc7a8db520fdfb8f",\
+        "type": "mqtt out",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Publish command",\
+        "topic": "",\
+        "qos": "1",\
+        "retain": "false",\
+        "respTopic": "",\
+        "contentType": "",\
+        "userProps": "",\
+        "correl": "",\
+        "expiry": "",\
+        "broker": "mqtt-broker-local",\
+        "x": 1410,\
+        "y": 980,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "f951eb487482b099",\
+        "type": "mqtt in",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Prices in",\
+        "topic": "prices/ee/today",\
+        "qos": "1",\
+        "datatype": "json",\
+        "broker": "mqtt-broker-local",\
+        "nl": false,\
+        "rap": true,\
+        "rh": 0,\
+        "inputs": 0,\
+        "x": 230,\
+        "y": 440,\
+        "wires": [\
+            [\
+                "f2c40132dfdf510c",\
+                "744e2c096ee519b7"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "f2c40132dfdf510c",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Cache in flow ctx",\
+        "func": "flow.set('prices', msg.payload);\\nnode.status(\{ fill: 'green', shape: 'dot', text: `$\{msg.payload.length\} slots cached` \});\\nreturn null;\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 460,\
+        "y": 440,\
+        "wires": [\
+            []\
+        ]\
+    \},\
+    \{\
+        "id": "744e2c096ee519b7",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Chart format",\
+        "func": "// Transform price array into chart-friendly \{ x, y \} points.\\nconst series = msg.payload.map(p => (\{\\n    x: p.ts * 1000,\\n    y: p.c_kwh\\n\}));\\nreturn \{ payload: [\{ series: ['c/kWh'], data: [series], labels: [''] \}] \};\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 460,\
+        "y": 500,\
+        "wires": [\
+            [\
+                "074f32b6011b4245"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "074f32b6011b4245",\
+        "type": "ui_chart",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Price chart",\
+        "group": "2207523241eb26db",\
+        "order": 1,\
+        "width": 12,\
+        "height": 6,\
+        "label": "EE price (c/kWh) \'97 15-min slots",\
+        "chartType": "line",\
+        "legend": "false",\
+        "xformat": "HH:mm",\
+        "interpolate": "step",\
+        "nodata": "Waiting for price data\'85",\
+        "dot": false,\
+        "ymin": "",\
+        "ymax": "",\
+        "removeOlder": 1,\
+        "removeOlderPoints": "",\
+        "removeOlderUnit": "86400",\
+        "cutout": 0,\
+        "useOneColor": false,\
+        "useUTC": false,\
+        "colors": [\
+            "#0094CE",\
+            "#aec7e8",\
+            "#ff7f0e",\
+            "#2ca02c",\
+            "#98df8a",\
+            "#d62728",\
+            "#ff9896",\
+            "#9467bd",\
+            "#c5b0d5"\
+        ],\
+        "outputs": 1,\
+        "useDifferentColor": false,\
+        "className": "",\
+        "x": 710,\
+        "y": 500,\
+        "wires": [\
+            []\
+        ]\
+    \},\
+    \{\
+        "id": "547fb8fdf6e803b5",\
+        "type": "inject",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "on startup",\
+        "props": [\
+            \{\
+                "p": "payload"\
+            \}\
+        ],\
+        "repeat": "",\
+        "crontab": "",\
+        "once": true,\
+        "onceDelay": 1.5,\
+        "topic": "",\
+        "payload": "seed",\
+        "payloadType": "str",\
+        "x": 790,\
+        "y": 120,\
+        "wires": [\
+            [\
+                "481def1dda713edb"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "481def1dda713edb",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Seed defaults",\
+        "func": "// Fires once shortly after flow start (and on manual redeploy).\\n// Pushes sane defaults to each dashboard widget AND primes flow.ch1_params.\\nconst defaults = \{\\n    cap: 500, init: 20, target: 90, power: 250,\\n    dur: 12, strategy: 'gentle_80', fit: true\\n\};\\nflow.set('ch1_params', defaults);\\n// Return parallel msgs \'97 one output per widget (see node config wires).\\nreturn [\\n    \{ payload: defaults.cap,      topic: 'cap'      \},\\n    \{ payload: defaults.init,     topic: 'init'     \},\\n    \{ payload: defaults.target,   topic: 'target'   \},\\n    \{ payload: defaults.power,    topic: 'power'    \},\\n    \{ payload: defaults.dur,      topic: 'dur'      \},\\n    \{ payload: defaults.strategy, topic: 'strategy' \},\\n    \{ payload: defaults.fit,      topic: 'fit'      \},\\n    \{ payload: \{ source: 'seed', text: 'Loaded defaults' \}, topic: 'log' \}\\n];\\n",\
+        "outputs": 8,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1040,\
+        "y": 120,\
+        "wires": [\
+            [\
+                "25b2a78a68f3bf16"\
+            ],\
+            [\
+                "cc8549fe4fcf1e49"\
+            ],\
+            [\
+                "4c21861822a49ad9"\
+            ],\
+            [\
+                "75c6b3c57dd9ba76"\
+            ],\
+            [\
+                "082a3a4c1380c411"\
+            ],\
+            [\
+                "abc69b7980d327e2"\
+            ],\
+            [\
+                "d9ea880b0eb6c933"\
+            ],\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "c5ba7592a9297ecf",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Post-optimise fanout",\
+        "func": "// Reads the MQTT-ready payload from fn-optimise (via the 6th output wire\\n// tapped into this node) and fans it out into four dashboard signals.\\nconst p = msg.payload;\\nif (!p || p.action !== 'schedule') \{ return null; \}\\n\\n// --- 1. Log entry ---\\nconst logEntry = \{\\n    source: 'optimise',\\n    text: `$\{p.strategy\} \'b7 $\{p.slots.length\} slots \'b7 ` +\\n          `target $\{p.effective_target_pct.toFixed(0)\}% \'b7 ` +\\n          `cost EUR $\{p.total_cost_eur.toFixed(4)\}` +\\n          (p.feasible ? '' : ' \'b7 PARTIAL')\\n\};\\n\\n// --- 2. Cost-comparison bar chart ---\\n// ui_chart bar format: one payload object, series across two bars.\\nconst naive = (typeof p.naive_cost_eur === \\"number\\") ? p.naive_cost_eur : (p.total_cost_eur + p.saving_eur);\\nconst chartMsg = \{\\n    payload: [\{\\n        series: ['Optimised', 'Charge now (naive)'],\\n        data: [[p.total_cost_eur], [naive]],\\n        labels: ['cost (EUR)']\\n    \}]\\n\};\\n\\n// --- 3. Effective-target text ---\\nconst effText = (Math.abs(p.effective_target_pct - p.params.target) < 0.1)\\n    ? `$\{p.effective_target_pct.toFixed(0)\} %`\\n    : `$\{p.effective_target_pct.toFixed(0)\} %  (user asked $\{p.params.target.toFixed(0)\} %)`;\\n\\n// --- 4. Feasibility badge ---\\nconst feasMsg = \{\\n    payload: p.feasible ? 'OK' : `\uc0\u9888  $\{p.reason || 'partial'\}`,\\n    // Colour via ui_text 'format' requires template; we send plain text.\\n\};\\n\\nconst naiveText = `$\{naive.toFixed(4)\}`;\\n\\nreturn [\\n    \{ payload: logEntry, topic: 'log' \},\\n    chartMsg,\\n    \{ payload: effText \},\\n    feasMsg,\\n    \{ payload: naiveText \}\\n];\\n",\
+        "outputs": 5,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1420,\
+        "y": 900,\
+        "wires": [\
+            [\
+                "b34f6930a6bb1221"\
+            ],\
+            [\
+                "920a848ec394b28c"\
+            ],\
+            [\
+                "fc4c136532f06737"\
+            ],\
+            [\
+                "cbf22a0fb30db2a6"\
+            ],\
+            [\
+                "ef8a4d60925e104b"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "b34f6930a6bb1221",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Event log",\
+        "func": "// Append a new event, write the whole rolling list to disk in a clean tabular layout.\\nconst MAX = 80;\\nlet events = flow.get('events') || [];\\nconst p = msg.payload || \{\};\\nconst text   = p.text || (typeof p === 'string' ? p : JSON.stringify(p));\\nconst source = (p.source || msg.topic || 'event').toString();\\n\\nconst now = new Date();\\nconst ts  = now.toLocaleTimeString('et-EE',\\n    \{ hour: '2-digit', minute: '2-digit', second: '2-digit',\\n      hour12: false, timeZone: 'Europe/Tallinn' \});\\n\\nevents.unshift(\{ t: ts, src: source.slice(0, 8), msg: text \});\\nif (events.length > MAX) events = events.slice(0, MAX);\\nflow.set('events', events);\\n\\n// Build a clean, fixed-width table. Newest first.\\nconst SRC_W = 10;\\nconst header =\\n    '+----------+------------+------------------------------------------------+\\\\n' +\\n    '|   time   |   source   | message                                        |\\\\n' +\\n    '+----------+------------+------------------------------------------------+';\\nconst rows = events.map(e => \{\\n    const src = `[$\{e.src\}]`.padEnd(SRC_W);\\n    return `| $\{e.t\} | $\{src\} | $\{(e.msg || '').slice(0, 46).padEnd(46)\} |`;\\n\});\\nconst footer =\\n    '+----------+------------+------------------------------------------------+\\\\n' +\\n    '# tail this file with:  tail -f event_log.txt\\\\n' +\\n    '# newest events shown at the top, max ' + MAX + ' kept.\\\\n';\\n\\nreturn \{ payload: header + '\\\\n' + rows.join('\\\\n') + '\\\\n' + footer \};\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 2400,\
+        "y": 740,\
+        "wires": [\
+            [\
+                "923e6c1a5f7fc926"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "23426f20f96abb87",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Button \uc0\u8594  log",\
+        "func": "// Wraps button clicks into log entries.\\nconst label = msg.payload === 'start' ? 'Start clicked' : 'Reset clicked';\\nreturn \{ payload: \{ source: 'user', text: label \}, topic: 'log' \};\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 2030,\
+        "y": 400,\
+        "wires": [\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "fc4c136532f06737",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "fc49d01b81348539",\
+        "order": 10,\
+        "width": 6,\
+        "height": 1,\
+        "name": "Effective target",\
+        "label": "Effective target (after mode cap)",\
+        "format": "\{\{msg.payload\}\}",\
+        "layout": "row-spread",\
+        "x": 1740,\
+        "y": 900,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "cbf22a0fb30db2a6",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "fc49d01b81348539",\
+        "order": 11,\
+        "width": 6,\
+        "height": 1,\
+        "name": "Feasibility",\
+        "label": "Schedule fits window?",\
+        "format": "\{\{msg.payload\}\}",\
+        "layout": "row-spread",\
+        "x": 1720,\
+        "y": 940,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "920a848ec394b28c",\
+        "type": "ui_chart",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Cost comparison",\
+        "group": "95a9eabb375ddad4",\
+        "order": 20,\
+        "width": 6,\
+        "height": 4,\
+        "label": "Cost: optimised vs. naive (EUR)",\
+        "chartType": "bar",\
+        "legend": "false",\
+        "xformat": "auto",\
+        "interpolate": "linear",\
+        "nodata": "(run Start first)",\
+        "dot": false,\
+        "ymin": "",\
+        "ymax": "",\
+        "removeOlder": 1,\
+        "removeOlderPoints": "",\
+        "removeOlderUnit": "3600",\
+        "cutout": 0,\
+        "useOneColor": false,\
+        "useUTC": false,\
+        "colors": [\
+            "#1f77b4",\
+            "#d62728",\
+            "#2ca02c",\
+            "#98df8a",\
+            "#aec7e8",\
+            "#ff7f0e",\
+            "#ffbb78",\
+            "#2ca02c"\
+        ],\
+        "outputs": 0,\
+        "useDifferentColor": true,\
+        "className": "",\
+        "x": 1750,\
+        "y": 860,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "ef8a4d60925e104b",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "95a9eabb375ddad4",\
+        "order": 15,\
+        "width": 6,\
+        "height": 1,\
+        "name": "Naive cost",\
+        "label": "Charge-now cost (\'80)",\
+        "format": "\{\{msg.payload\}\}",\
+        "layout": "row-spread",\
+        "x": 1730,\
+        "y": 980,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "923e6c1a5f7fc926",\
+        "type": "file",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "event_log.txt",\
+        "filename": "/Users/karlerikromulus/School/charging-optimiser/node-red/event_log.txt",\
+        "filenameType": "str",\
+        "appendNewline": false,\
+        "createDir": true,\
+        "overwriteFile": "true",\
+        "encoding": "utf8",\
+        "x": 2550,\
+        "y": 740,\
+        "wires": [\
+            []\
+        ]\
+    \},\
+    \{\
+        "id": "72cc4694b8be6542",\
+        "type": "ui_dropdown",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Time scale",\
+        "label": "Time scale (sim)",\
+        "tooltip": "How fast the simulated charge plays in the dashboard.",\
+        "place": "Pick a speed",\
+        "group": "99fb6c49324cb851",\
+        "order": 5,\
+        "width": 6,\
+        "height": 1,\
+        "passthru": false,\
+        "multiple": false,\
+        "options": [\
+            \{\
+                "label": "Realtime (x1)",\
+                "value": 1,\
+                "type": "num"\
+            \},\
+            \{\
+                "label": "x60 \'97 1 min/sec",\
+                "value": 60,\
+                "type": "num"\
+            \},\
+            \{\
+                "label": "x3600 \'97 1 hour/sec",\
+                "value": 3600,\
+                "type": "num"\
+            \}\
+        ],\
+        "topic": "speed",\
+        "topicType": "str",\
+        "className": "",\
+        "x": 1560,\
+        "y": 120,\
+        "wires": [\
+            [\
+                "b3cf4fb5c4c12e0b"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "b3cf4fb5c4c12e0b",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Speed -> state machine",\
+        "func": "// Forward speed change to state machine + log it directly.\\nconst v = Number(msg.payload) || 1;\\nconst dbg = \{ payload: \{ source: 'tee-spd', text: `dropdown sent x$\{v\}` \}, topic: 'log' \};\\nreturn [\{ topic: 'speed', payload: v \}, dbg];\\n",\
+        "outputs": 2,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1420,\
+        "y": 440,\
+        "wires": [\
+            [\
+                "ba2ab5cb10d6449c"\
+            ],\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "592ea7dba68b2c0b",\
+        "type": "ui_text",\
+        "z": "16bb12a106bd8c3c",\
+        "group": "fc49d01b81348539",\
+        "order": 12,\
+        "width": 6,\
+        "height": 1,\
+        "name": "Current slot",\
+        "label": "Current slot (sim)",\
+        "format": "\{\{msg.payload\}\}",\
+        "layout": "row-spread",\
+        "x": 2790,\
+        "y": 760,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "ba2ab5cb10d6449c",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "State machine",\
+        "func": "// ============================================================\\n// Simulated charging state machine (clean version).\\n// Inputs (msg.topic):\\n//   engage  - msg.payload = full schedule from fn-optimise\\n//   tick    - external 1 Hz inject (3b-inject-tick)\\n//   cancel  - reset to IDLE\\n//   speed   - msg.payload = number (1, 60, 3600)\\n// Outputs: [state, soc, current_slot_text, log]\\n// ============================================================\\n\\nlet st = context.get('sm') || \{\\n    engaged: false, schedule: null,\\n    sim_ms: 0, soc: 0, status: 'IDLE', speed: 3600\\n\};\\n\\nfunction slotMs(sch) \{ return (sch.slot_minutes || 15) * 60 * 1000; \}\\nfunction fmtClock(ms) \{\\n    return new Date(ms).toLocaleTimeString('et-EE',\\n        \{ hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Tallinn' \});\\n\}\\nfunction showStatus() \{\\n    const colour = st.status === 'CHARGING' ? 'green' :\\n                   st.status === 'DONE'     ? 'blue'  :\\n                   st.status === 'WAITING'  ? 'yellow':\\n                   st.status === 'IDLE'     ? 'grey'  : 'red';\\n    node.status(\{ fill: colour, shape: 'dot',\\n        text: `$\{st.status\} | x$\{st.speed\} | SoC $\{st.soc.toFixed(1)\}%` \});\\n\}\\n\\nconst oState = s => (\{ payload: s, topic: 'state' \});\\nconst oSoC   = s => (\{ payload: s, topic: 'soc' \});\\nconst oSlot  = s => (\{ payload: s, topic: 'current_slot' \});\\nconst oLog   = (src, text) => (\{ payload: \{ source: src, text \}, topic: 'log' \});\\n\\n// ---------- speed change ----------\\nif (msg.topic === 'speed') \{\\n    st.speed = Number(msg.payload) || 1;\\n    context.set('sm', st); showStatus();\\n    return [null, null, null, oLog('sm-spd', `speed -> x$\{st.speed\}`)];\\n\}\\n\\n// ---------- cancel / reset ----------\\nif (msg.topic === 'cancel' ||\\n   (msg.topic === 'engage' && msg.payload && msg.payload.action === 'reset')) \{\\n    st = \{ engaged: false, schedule: null,\\n           sim_ms: 0, soc: 0, status: 'IDLE', speed: st.speed \};\\n    context.set('sm', st); showStatus();\\n    return [oState('IDLE'), oSoC(0), oSlot('-'), oLog('sm-rst', 'reset')];\\n\}\\n\\n// ---------- engage ----------\\nif (msg.topic === 'engage' && msg.payload && msg.payload.action === 'schedule') \{\\n    const sch = msg.payload;\\n    if (!sch.slots || sch.slots.length === 0) \{\\n        return [oState('NO SLOTS'), null, oSlot('-'),\\n                oLog('sm-eng', 'engage with empty slots')];\\n    \}\\n    st.engaged  = true;\\n    st.schedule = sch;\\n    st.sim_ms   = sch.slots[0].ts * 1000;\\n    st.soc      = sch.params.init;\\n    st.status   = 'WAITING';\\n    context.set('sm', st); showStatus();\\n    return [\\n        oState('WAITING'),\\n        oSoC(+st.soc.toFixed(1)),\\n        oSlot(`engage @ $\{fmtClock(st.sim_ms)\}`),\\n        oLog('sm-eng', `engaged: $\{sch.slots.length\} slots, ` +\\n                       `target $\{sch.effective_target_pct.toFixed(0)\}%, x$\{st.speed\}`)\\n    ];\\n\}\\n\\n// ---------- tick ----------\\nif (msg.topic === 'tick') \{\\n    if (!st.engaged) \{ return null; \}\\n\\n    const sMs        = slotMs(st.schedule);\\n    const slotSec    = sMs / 1000;\\n    const advanceSec = st.speed;\\n\\n    const prevTs = st.sim_ms / 1000;\\n    const newTs  = prevTs + advanceSec;\\n\\n    // Sweep ALL slots that overlap [prevTs, newTs] so x3600 doesn't skip\\n    let chargedWh  = 0;\\n    let activeSlot = null;\\n    for (const s of st.schedule.slots) \{\\n        const overlapStart = Math.max(prevTs, s.ts);\\n        const overlapEnd   = Math.min(newTs, s.ts + slotSec);\\n        if (overlapEnd > overlapStart) \{\\n            chargedWh += s.power_w * ((overlapEnd - overlapStart) / 3600);\\n            activeSlot = s;\\n        \}\\n    \}\\n\\n    if (chargedWh > 0) \{\\n        const dPct = (chargedWh / st.schedule.params.cap) * 100;\\n        st.soc = Math.min(100, st.soc + dPct);\\n    \}\\n\\n    st.sim_ms += advanceSec * 1000;\\n\\n    const last        = st.schedule.slots[st.schedule.slots.length - 1];\\n    const scheduleEnd = last.ts + slotSec;\\n\\n    if (newTs >= scheduleEnd) \{\\n        st.status  = 'DONE';\\n        st.engaged = false;\\n        context.set('sm', st); showStatus();\\n        return [\\n            oState('DONE'),\\n            oSoC(+st.soc.toFixed(1)),\\n            oSlot(`done @ $\{fmtClock(st.sim_ms)\}`),\\n            oLog('sm-don', `complete: SoC $\{st.soc.toFixed(1)\}% ` +\\n                           `cost EUR $\{st.schedule.total_cost_eur.toFixed(4)\}`)\\n        ];\\n    \}\\n\\n    if (chargedWh > 0) \{\\n        st.status = 'CHARGING';\\n        context.set('sm', st); showStatus();\\n        return [\\n            oState('CHARGING'),\\n            oSoC(+st.soc.toFixed(1)),\\n            oSlot(`$\{fmtClock(st.sim_ms)\} | $\{activeSlot.c_kwh.toFixed(3)\} c/kWh | ` +\\n                  `$\{activeSlot.power_w.toFixed(0)\} W`),\\n            null\\n        ];\\n    \}\\n\\n    st.status = 'WAITING';\\n    context.set('sm', st); showStatus();\\n    return [\\n        oState('WAITING'),\\n        null,\\n        oSlot(`$\{fmtClock(st.sim_ms)\} | gap`),\\n        null\\n    ];\\n\}\\n\\nreturn null;\\n",\
+        "outputs": 4,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 2040,\
+        "y": 500,\
+        "wires": [\
+            [\
+                "0b7050462f7faa1f",\
+                "ebb79285bf54a1d5"\
+            ],\
+            [\
+                "39d46c4c29b8a701"\
+            ],\
+            [\
+                "592ea7dba68b2c0b"\
+            ],\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "b14e316a058ffdad",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Optimise -> engage",\
+        "func": "// Tap fn-optimise schedule. Forward to state machine + log file.\\nmsg.topic = 'engage';\\nconst dbg = \{ payload: \{ source: 'tee-opt', text: 'forwarded schedule to state machine' \}, topic: 'log' \};\\nreturn [msg, dbg];\\n",\
+        "outputs": 2,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1600,\
+        "y": 600,\
+        "wires": [\
+            [\
+                "ba2ab5cb10d6449c"\
+            ],\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "354cc39934e43301",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Reset -> cancel",\
+        "func": "// Reset button \uc0\u8594  cancel topic for state machine.\\nif (msg.payload === 'reset') return \{ topic: 'cancel' \};\\nreturn null;\\n",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1660,\
+        "y": 660,\
+        "wires": [\
+            [\
+                "ba2ab5cb10d6449c"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "124e567101c12e2c",\
+        "type": "inject",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "1 Hz tick",\
+        "props": [\
+            \{\
+                "p": "payload"\
+            \},\
+            \{\
+                "p": "topic",\
+                "vt": "str"\
+            \}\
+        ],\
+        "repeat": "1",\
+        "crontab": "",\
+        "once": true,\
+        "onceDelay": 0.1,\
+        "topic": "tick",\
+        "payload": "",\
+        "payloadType": "date",\
+        "x": 1620,\
+        "y": 540,\
+        "wires": [\
+            [\
+                "ba2ab5cb10d6449c"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "ebb79285bf54a1d5",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "State -> MQTT",\
+        "func": "return \{ topic: 'charger/1/state', payload: msg.payload \};",\
+        "outputs": 1,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 2360,\
+        "y": 480,\
+        "wires": [\
+            [\
+                "d87b7164b5877852"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "d87b7164b5877852",\
+        "type": "mqtt out",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Publish state to ESP",\
+        "topic": "",\
+        "qos": "0",\
+        "retain": "false",\
+        "respTopic": "",\
+        "contentType": "",\
+        "userProps": "",\
+        "correl": "",\
+        "expiry": "",\
+        "broker": "mqtt-broker-local",\
+        "x": 2600,\
+        "y": 480,\
+        "wires": []\
+    \},\
+    \{\
+        "id": "80a22dcc57ae758f",\
+        "type": "mqtt in",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Encoder params in",\
+        "topic": "charger/1/params",\
+        "qos": "0",\
+        "datatype": "auto-detect",\
+        "broker": "mqtt-broker-local",\
+        "nl": false,\
+        "rap": true,\
+        "rh": 0,\
+        "inputs": 0,\
+        "x": 790,\
+        "y": 260,\
+        "wires": [\
+            [\
+                "a910094a30778d38"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "a910094a30778d38",\
+        "type": "function",\
+        "z": "16bb12a106bd8c3c",\
+        "name": "Apply encoder params",\
+        "func": "// Parse encoder params JSON from ESP and update both flow context AND\\n// the visible dashboard numeric widgets. The widget IDs in this flow are:\\n//   ui-cap, ui-init, ui-target, ui-power, ui-dur\\n// We emit one message per widget so the user actually sees the values change.\\n\\n// MQTT in node may auto-parse JSON to an object, or hand us a raw string,\\n// or even a Buffer. Handle all three.\\nlet p = msg.payload;\\nif (Buffer.isBuffer(p)) p = p.toString('utf8');\\nif (typeof p === 'string') \{\\n    try \{ p = JSON.parse(p); \}\\n    catch (e) \{\\n        return [null, null, null, null, null,\\n                \{ payload: \{ source: 'esp-enc', text: 'bad JSON: ' + p \}, topic: 'log' \}];\\n    \}\\n\}\\nif (typeof p !== 'object' || p === null) \{\\n    return [null, null, null, null, null,\\n            \{ payload: \{ source: 'esp-enc', text: 'unexpected payload type: ' + typeof p \}, topic: 'log' \}];\\n\}\\n\\nconst cur = flow.get('ch1_params') || \{\\n    cap: 500, init: 20, target: 90, power: 250,\\n    dur: 12, strategy: 'cheapest', fit: true\\n\};\\n\\ncur.cap    = Number(p.cap)    || cur.cap;\\ncur.init   = Number(p.init)   || cur.init;\\ncur.target = Number(p.target) || cur.target;\\ncur.power  = Number(p.power)  || cur.power;\\ncur.dur    = Number(p.dur)    || cur.dur;\\nflow.set('ch1_params', cur);\\n\\nconst summary = `cap=$\{cur.cap\}, init=$\{cur.init\}, target=$\{cur.target\}, power=$\{cur.power\}, dur=$\{cur.dur\}`;\\n\\n// Outputs (in order): cap, init, target, power, dur, log\\nreturn [\\n    \{ payload: cur.cap \},\\n    \{ payload: cur.init \},\\n    \{ payload: cur.target \},\\n    \{ payload: cur.power \},\\n    \{ payload: cur.dur \},\\n    \{ payload: \{ source: 'esp-enc', text: 'params from encoder: ' + summary \}, topic: 'log' \}\\n];\\n",\
+        "outputs": 6,\
+        "noerr": 0,\
+        "initialize": "",\
+        "finalize": "",\
+        "libs": [],\
+        "x": 1020,\
+        "y": 260,\
+        "wires": [\
+            [\
+                "25b2a78a68f3bf16"\
+            ],\
+            [\
+                "cc8549fe4fcf1e49"\
+            ],\
+            [\
+                "4c21861822a49ad9"\
+            ],\
+            [\
+                "75c6b3c57dd9ba76"\
+            ],\
+            [\
+                "082a3a4c1380c411"\
+            ],\
+            [\
+                "b34f6930a6bb1221"\
+            ]\
+        ]\
+    \},\
+    \{\
+        "id": "69e678518d438924",\
+        "type": "ui_group",\
+        "name": "User inputs",\
+        "tab": "5aeb0a529af87754",\
+        "order": 1,\
+        "disp": true,\
+        "width": "6",\
+        "collapse": false,\
+        "className": ""\
+    \},\
+    \{\
+        "id": "99fb6c49324cb851",\
+        "type": "ui_group",\
+        "name": "Control",\
+        "tab": "5aeb0a529af87754",\
+        "order": 2,\
+        "disp": true,\
+        "width": "6",\
+        "collapse": false,\
+        "className": ""\
+    \},\
+    \{\
+        "id": "fc49d01b81348539",\
+        "type": "ui_group",\
+        "name": "Status",\
+        "tab": "5aeb0a529af87754",\
+        "order": 3,\
+        "disp": true,\
+        "width": "6",\
+        "collapse": false,\
+        "className": ""\
+    \},\
+    \{\
+        "id": "95a9eabb375ddad4",\
+        "type": "ui_group",\
+        "name": "Schedule & cost",\
+        "tab": "5aeb0a529af87754",\
+        "order": 4,\
+        "disp": true,\
+        "width": "6",\
+        "collapse": false,\
+        "className": ""\
+    \},\
+    \{\
+        "id": "mqtt-broker-local",\
+        "type": "mqtt-broker",\
+        "name": "Local Mosquitto",\
+        "broker": "127.0.0.1",\
+        "port": "1883",\
+        "clientid": "node-red-charger",\
+        "autoConnect": true,\
+        "usetls": false,\
+        "protocolVersion": "4",\
+        "keepalive": "60",\
+        "cleansession": true,\
+        "birthTopic": "",\
+        "birthQos": "0",\
+        "birthPayload": "",\
+        "birthMsg": \{\},\
+        "closeTopic": "",\
+        "closeQos": "0",\
+        "closePayload": "",\
+        "closeMsg": \{\},\
+        "willTopic": "",\
+        "willQos": "0",\
+        "willPayload": "",\
+        "willMsg": \{\},\
+        "userProps": "",\
+        "sessionExpiry": ""\
+    \},\
+    \{\
+        "id": "2207523241eb26db",\
+        "type": "ui_group",\
+        "name": "Prices today",\
+        "tab": "5aeb0a529af87754",\
+        "order": 5,\
+        "disp": true,\
+        "width": 12,\
+        "collapse": false,\
+        "className": ""\
+    \},\
+    \{\
+        "id": "5aeb0a529af87754",\
+        "type": "ui_tab",\
+        "name": "Channel 1",\
+        "icon": "dashboard",\
+        "order": 1,\
+        "disabled": false,\
+        "hidden": false\
+    \},\
+    \{\
+        "id": "a46f555f756f3cdb",\
+        "type": "global-config",\
+        "env": [],\
+        "modules": \{\
+            "node-red-dashboard": "3.6.6"\
+        \}\
+    \}\
+]}
